@@ -1,0 +1,32 @@
+[CV 1/10] END base_estimator__C=1.0, base_estimator__gamma=auto, base_estimator__kernel=linear, base_estimator__max_iter=1000000000, max_samples=0.1, n_estimators=10;, score=0.899 total time= 6.1min
+[CV 2/10] END base_estimator__C=1.0, base_estimator__gamma=auto, base_estimator__kernel=linear, base_estimator__max_iter=1000000000, max_samples=0.1, n_estimators=10;, score=0.897 total time= 7.9min
+[CV 3/10] END base_estimator__C=1.0, base_estimator__gamma=auto, base_estimator__kernel=linear, base_estimator__max_iter=1000000000, max_samples=0.1, n_estimators=10;, score=0.900 total time= 8.2min
+[CV 4/10] END base_estimator__C=1.0, base_estimator__gamma=auto, base_estimator__kernel=linear, base_estimator__max_iter=1000000000, max_samples=0.1, n_estimators=10;, score=0.900 total time= 8.0min
+[CV 5/10] END base_estimator__C=1.0, base_estimator__gamma=auto, base_estimator__kernel=linear, base_estimator__max_iter=1000000000, max_samples=0.1, n_estimators=10;, score=0.900 total time= 8.3min
+[CV 6/10] END base_estimator__C=1.0, base_estimator__gamma=auto, base_estimator__kernel=linear, base_estimator__max_iter=1000000000, max_samples=0.1, n_estimators=10;, score=0.894 total time= 7.6min
+[CV 7/10] END base_estimator__C=1.0, base_estimator__gamma=auto, base_estimator__kernel=linear, base_estimator__max_iter=1000000000, max_samples=0.1, n_estimators=10;, score=0.897 total time= 7.6min
+[CV 8/10] END base_estimator__C=1.0, base_estimator__gamma=auto, base_estimator__kernel=linear, base_estimator__max_iter=1000000000, max_samples=0.1, n_estimators=10;, score=0.893 total time= 7.7min
+[CV 9/10] END base_estimator__C=1.0, base_estimator__gamma=auto, base_estimator__kernel=linear, base_estimator__max_iter=1000000000, max_samples=0.1, n_estimators=10;, score=0.900 total time= 8.5min
+[CV 10/10] END base_estimator__C=1.0, base_estimator__gamma=auto, base_estimator__kernel=linear, base_estimator__max_iter=1000000000, max_samples=0.1, n_estimators=10;, score=0.893 total time= 8.0min
+[CV 1/10] END base_estimator__C=1.0, base_estimator__gamma=auto, base_estimator__kernel=poly, base_estimator__max_iter=1000000000, max_samples=0.1, n_estimators=10;, score=0.901 total time=29.1min
+[CV 2/10] END base_estimator__C=1.0, base_estimator__gamma=auto, base_estimator__kernel=poly, base_estimator__max_iter=1000000000, max_samples=0.1, n_estimators=10;, score=0.901 total time=21.0min
+[CV 3/10] END base_estimator__C=1.0, base_estimator__gamma=auto, base_estimator__kernel=poly, base_estimator__max_iter=1000000000, max_samples=0.1, n_estimators=10;, score=0.900 total time=24.7min
+[CV 4/10] END base_estimator__C=1.0, base_estimator__gamma=auto, base_estimator__kernel=poly, base_estimator__max_iter=1000000000, max_samples=0.1, n_estimators=10;, score=0.900 total time=25.0min
+[CV 5/10] END base_estimator__C=1.0, base_estimator__gamma=auto, base_estimator__kernel=poly, base_estimator__max_iter=1000000000, max_samples=0.1, n_estimators=10;, score=0.900 total time=22.7min
+[CV 6/10] END base_estimator__C=1.0, base_estimator__gamma=auto, base_estimator__kernel=poly, base_estimator__max_iter=1000000000, max_samples=0.1, n_estimators=10;, score=0.900 total time=21.9min
+[CV 7/10] END base_estimator__C=1.0, base_estimator__gamma=auto, base_estimator__kernel=poly, base_estimator__max_iter=1000000000, max_samples=0.1, n_estimators=10;, score=0.900 total time=16.6min
+[CV 8/10] END base_estimator__C=1.0, base_estimator__gamma=auto, base_estimator__kernel=poly, base_estimator__max_iter=1000000000, max_samples=0.1, n_estimators=10;, score=0.900 total time=18.6min
+[CV 9/10] END base_estimator__C=1.0, base_estimator__gamma=auto, base_estimator__kernel=poly, base_estimator__max_iter=1000000000, max_samples=0.1, n_estimators=10;, score=0.900 total time=59.4min
+[CV 10/10] END base_estimator__C=1.0, base_estimator__gamma=auto, base_estimator__kernel=poly, base_estimator__max_iter=1000000000, max_samples=0.1, n_estimators=10;, score=0.900 total time=46.9min
+[CV 1/10] END base_estimator__C=1.0, base_estimator__gamma=auto, base_estimator__kernel=rbf, base_estimator__max_iter=1000000000, max_samples=0.1, n_estimators=10;, score=0.901 total time=   0.8s
+[CV 2/10] END base_estimator__C=1.0, base_estimator__gamma=auto, base_estimator__kernel=rbf, base_estimator__max_iter=1000000000, max_samples=0.1, n_estimators=10;, score=0.901 total time=   0.9s
+[CV 3/10] END base_estimator__C=1.0, base_estimator__gamma=auto, base_estimator__kernel=rbf, base_estimator__max_iter=1000000000, max_samples=0.1, n_estimators=10;, score=0.900 total time=   0.9s
+[CV 4/10] END base_estimator__C=1.0, base_estimator__gamma=auto, base_estimator__kernel=rbf, base_estimator__max_iter=1000000000, max_samples=0.1, n_estimators=10;, score=0.900 total time=   0.8s
+[CV 5/10] END base_estimator__C=1.0, base_estimator__gamma=auto, base_estimator__kernel=rbf, base_estimator__max_iter=1000000000, max_samples=0.1, n_estimators=10;, score=0.900 total time=   0.9s
+[CV 6/10] END base_estimator__C=1.0, base_estimator__gamma=auto, base_estimator__kernel=rbf, base_estimator__max_iter=1000000000, max_samples=0.1, n_estimators=10;, score=0.900 total time=   0.8s
+[CV 7/10] END base_estimator__C=1.0, base_estimator__gamma=auto, base_estimator__kernel=rbf, base_estimator__max_iter=1000000000, max_samples=0.1, n_estimators=10;, score=0.900 total time=   0.9s
+[CV 8/10] END base_estimator__C=1.0, base_estimator__gamma=auto, base_estimator__kernel=rbf, base_estimator__max_iter=1000000000, max_samples=0.1, n_estimators=10;, score=0.900 total time=   0.8s
+[CV 9/10] END base_estimator__C=1.0, base_estimator__gamma=auto, base_estimator__kernel=rbf, base_estimator__max_iter=1000000000, max_samples=0.1, n_estimators=10;, score=0.900 total time=   0.9s
+[CV 10/10] END base_estimator__C=1.0, base_estimator__gamma=auto, base_estimator__kernel=rbf, base_estimator__max_iter=1000000000, max_samples=0.1, n_estimators=10;, score=0.900 total time=   0.9s
+Best Accuracy: 0.9002000000000001 
+Best Parameter: {'base_estimator__C': 1.0, 'base_estimator__gamma': 'auto', 'base_estimator__kernel': 'poly', 'base_estimator__max_iter': 1000000000, 'max_samples': 0.1, 'n_estimators': 10}

@@ -1,0 +1,405 @@
+{% extends "template.html" %} {% block content %}
+<div class="px-4 py-5 my-5 text-center">
+  <img
+    class="d-block mx-auto mb-4 rounded-circle"
+    src="/favicon/android-chrome-192x192.png"
+    alt=""
+    width="72"
+    height="72"
+  />
+  <h1 class="display-5 fw-bold">Anime Recommendation System</h1>
+  <div class="col-lg-6 mx-auto">
+    <p class="lead mb-5">
+      Find the best anime for a specific user based on
+      <a href="https://www.kaggle.com/datasets/azathoth42/myanimelist"
+        >MyAnimeList Dataset</a
+      >
+      using SVM Classifier and Collaborative Filtering.
+    </p>
+  </div>
+  <div class="col-lg-8 mx-auto">
+    <div
+      id="user-select2-container"
+      class="d-grid gap-2 d-sm-flex justify-content-sm-center"
+      style="z-index: 1"
+    >
+      <select
+        id="user-select2"
+        name="state"
+        style="width: 175px; height: 10px; opacity: 0"
+      ></select>
+    </div>
+    <div
+      class="d-grid gap-2 d-sm-flex justify-content-sm-center position-relative"
+      style="margin-top: -48px; z-index: 20020"
+    >
+      <button
+        id="btn-select-user"
+        type="button"
+        class="btn btn-primary btn-lg px-4 gap-3"
+      >
+        SELECT USER
+      </button>
+      <div class="toggler-wrapper">
+        <div class="badge">Enable Model?&ThickSpace;</div>
+        <label class="toggler-container">
+          <input type="checkbox" id="enable-model" name="enable-model" />
+          <div class="toggler-slider">
+            <div class="toggler-knob"></div>
+          </div>
+        </label>
+        <div class="badge">
+          <sup
+            class="rounded-circle border"
+            style="cursor: help; padding: 1.5px 4px; font-size: 7px"
+            title='Enable SVM model for recommendation to remove animes that are classified as "Disliked" by the selected user.'
+          >
+            ?
+          </sup>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    id="recommend-list-wrapper"
+    class="col-lg-12 mx-auto"
+    style="display: none"
+  >
+    <div class="row">
+      <div class="col-md">
+        <div class="card text-center">
+          <div class="card-body">
+            <h4 class="card-title mb-4">
+              Result of Leave-one-out is <b id="leave-one-out-result"></b>
+              <div class="badge">
+                <sup
+                  class="rounded-circle border"
+                  style="cursor: help; padding: 1.5px 4px; font-size: 7px"
+                  title="TP: The anime is liked and it is recommended.&#013;&#010;FP: The anime is disliked but it is recommended.&#013;&#010;FN: The anime is liked but it is not recommended.&#013;&#010;TN: The anime is disliked and it is not recommended."
+                >
+                  ?
+                </sup>
+              </div>
+            </h4>
+            <h5>Time to process is <b id="process-time"></b></h5>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card text-center">
+          <div class="card-body">
+            <h4 class="card-title mb-4">
+              Seen Anime List For
+              <a class="recommend-list-target" target="_blank"></a>
+            </h4>
+            <table
+              id="seen-anime-list"
+              class="table table-hover"
+              style="border-color: #666"
+            >
+              <thead class="thead-inverse">
+                <tr>
+                  <th>#</th>
+                  <th>Cover</th>
+                  <th>Title</th>
+                  <th>Rating</th>
+                  <th>MAL Rank</th>
+                  <th>MAL Page</th>
+                  <th>User Rating</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card text-center">
+          <div class="card-body">
+            <h4 class="card-title mb-4">
+              Recommendation List For
+              <a class="recommend-list-target" target="_blank"></a>
+            </h4>
+            <table
+              id="recommend-list"
+              class="table table-hover"
+              style="border-color: #666"
+            >
+              <thead class="thead-inverse">
+                <tr>
+                  <th>#</th>
+                  <th>Cover</th>
+                  <th>Title</th>
+                  <th>Rating</th>
+                  <th>MAL Rank</th>
+                  <th>MAL Page</th>
+                  <th>Similarity Score</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block script %}
+<script>
+  var USER_LIST = JSON.parse({{ users|tojson|safe }});
+  var SELECT2_PAGE_SIZE = 20;
+
+  $(document).ready(function () {
+    var tableRecommendation = $("#recommend-list").DataTable({
+      createdRow: function(row, data, dataIndex) {
+        if (data.is_leave_one_out) {
+          $(row).css({"border-color": "khaki",
+             "border-width":"1px",
+             "border-style":"solid",
+             "background-color":"#666"});
+        }
+      },
+      columnDefs: [
+        {
+          searchable: false,
+          targets: 0,
+        },
+        {
+          searchable: false,
+          orderable: false,
+          targets: 1,
+        },
+        {
+          searchable: false,
+          orderable: false,
+          targets: 5,
+        },
+      ],
+      columns: [
+        { data: "order" },
+        {
+          data: "image_url",
+          render: function (data, type, row) {
+            return (
+              '<img src="' +
+              data +
+              '" width="50" height="70" alt="' +
+              row.title +
+              ' Cover">'
+            );
+          },
+        },
+        { data: "title" },
+        { data: "score" },
+        {
+          data: "rank",
+        },
+        {
+          data: "anime_id",
+          render: function (data, type, row) {
+            var link = "https://myanimelist.net/anime/" + data + "/";
+            return (
+              "<a href='" +
+              link +
+              "' target='_blank'>" +
+              row.title_english +
+              "</a>"
+            );
+          },
+        },
+        { data: "mean" },
+      ],
+      order: [[0, "asc"]],
+    });
+
+    var tableSeenAnime = $("#seen-anime-list").DataTable({
+      createdRow: function(row, data, dataIndex) {
+        if (data.is_leave_one_out) {
+          $(row).css({"border-color": "khaki",
+             "border-width":"1px",
+             "border-style":"solid",
+             "background-color":"#666"});
+        }
+      },
+      columnDefs: [
+        {
+          searchable: false,
+          targets: 0,
+        },
+        {
+          searchable: false,
+          orderable: false,
+          targets: 1,
+        },
+        {
+          searchable: false,
+          orderable: false,
+          targets: 5,
+        },
+      ],
+      columns: [
+        { data: "order" },
+        {
+          data: "image_url",
+          render: function (data, type, row) {
+            return (
+              '<img src="' +
+              data +
+              '" width="50" height="70" alt="' +
+              row.title +
+              ' Cover">'
+            );
+          },
+        },
+        { data: "title" },
+        { data: "score" },
+        {
+          data: "rank",
+        },
+        {
+          data: "anime_id",
+          render: function (data, type, row) {
+            var link = "https://myanimelist.net/anime/" + data + "/";
+            return (
+              "<a href='" +
+              link +
+              "' target='_blank'>" +
+              row.title_english +
+              "</a>"
+            );
+          },
+        },
+        { data: "user_rating" },
+      ],
+      order: [[0, "asc"]],
+    });
+
+    jQuery.fn.select2.amd.require(
+      ["select2/data/array", "select2/utils"],
+      function (ArrayData, Utils) {
+        function CustomData($element, options) {
+          CustomData.__super__.constructor.call(this, $element, options);
+        }
+        Utils.Extend(CustomData, ArrayData);
+
+        CustomData.prototype.query = function (params, callback) {
+          results = [];
+          if (params.term && params.term !== "") {
+            results = USER_LIST.filter(function (e) {
+              return (
+                e.text.toUpperCase().indexOf(params.term.toUpperCase()) >= 0
+              );
+            });
+          } else {
+            results = USER_LIST;
+          }
+
+          if (!("page" in params)) {
+            params.page = 1;
+          }
+          var data = {};
+          data.results = results.slice(
+            (params.page - 1) * SELECT2_PAGE_SIZE,
+            params.page * SELECT2_PAGE_SIZE
+          );
+          data.pagination = {};
+          data.pagination.more =
+            params.page * SELECT2_PAGE_SIZE < results.length;
+          callback(data);
+        };
+
+        $(document).ready(function () {
+          $("#user-select2").select2({
+            ajax: {},
+            dataAdapter: CustomData,
+          });
+        });
+      }
+    );
+
+    function updateData(fetchUrl) {
+      $.ajax({
+        url: fetchUrl,
+        type: "GET",
+        dataType: "json",
+        success: function (data) {
+          tableRecommendation.clear();
+          tableRecommendation.rows
+            .add(data.recommendation.map((item, idx) => ({ ...item, order: ++idx })))
+            .draw();
+
+          tableSeenAnime.clear();
+          tableSeenAnime.rows
+            .add(data.seen_anime.map((item, idx) => ({ ...item, order: ++idx })))
+            .draw();
+
+          var leaveOneOutResult = 'No Data';
+          switch (data.leave_one_out_result) {
+            case 'TP':
+              leaveOneOutResult  = 'True Positive';
+              $("#leave-one-out-result").css({"color": "palegreen"})
+              break;
+
+            case 'FP':
+              leaveOneOutResult  = 'False Positive';
+              $("#leave-one-out-result").css({"color": "powderblue"})
+              break;
+
+            case 'FN':
+              leaveOneOutResult  = 'False Negative';
+              $("#leave-one-out-result").css({"color": "moccasin"})
+              break;
+
+            case 'TN':
+              leaveOneOutResult  = 'True Negative';
+              $("#leave-one-out-result").css({"color": "tomato"})
+              break;
+          }
+
+          $("#leave-one-out-result").text(leaveOneOutResult);
+          $("#process-time").text(data.process_time);
+
+          var username = $("#user-select2 option:selected").text();
+          var profile = "https://myanimelist.net/profile/" + username;
+          $(".recommend-list-target").text(username);
+          $(".recommend-list-target").attr("href", profile);
+          $("#recommend-list-wrapper").show();
+        },
+        error: function (data) {
+          console.log(data);
+        },
+      });
+    }
+
+    $("#user-select2").on("select2:select", function (e) {
+      $("#recommend-list-wrapper").hide();
+      var user = e.params.data.id;
+      var enableModel =  $('#enable-model').is(':checked');
+      var fetchUrl = "/recommend/" + user + "?use-model=" + enableModel;
+
+      updateData(fetchUrl);
+    });
+
+    $('#enable-model').on('change', function (e) {
+      $("#recommend-list-wrapper").hide();
+      if (typeof $('#user-select2').select2('data')[0] === 'undefined') {
+        return;
+      }
+
+      var user = $('#user-select2').select2('data')[0].id;
+
+      var enableModel = $('#enable-model').is(':checked');
+      var fetchUrl = "/recommend/" + user + "?use-model=" + enableModel;
+
+      updateData(fetchUrl);
+    });
+
+    $("#btn-select-user").on("click", function () {
+      $("#user-select2").select2("open");
+    });
+  });
+</script>
+{% endblock %}

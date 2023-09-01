@@ -1,0 +1,33 @@
+# total time might not be accurate because multi-threading and subprocesses is used
+[CV 1/5] END base_estimator__gamma=auto, base_estimator__kernel=linear;, score=0.902 total time=17.1min
+[CV 2/5] END base_estimator__gamma=auto, base_estimator__kernel=linear;, score=0.902 total time=15.2min
+[CV 3/5] END base_estimator__gamma=auto, base_estimator__kernel=linear;, score=0.884 total time=13.7min
+[CV 5/5] END base_estimator__gamma=auto, base_estimator__kernel=linear;, score=0.895 total time=14.4min
+[CV 4/5] END base_estimator__gamma=auto, base_estimator__kernel=linear;, score=0.895 total time=15.6min
+[CV 1/5] END base_estimator__gamma=auto, base_estimator__kernel=rbf;, score=0.903 total time=   1.8s
+[CV 2/5] END base_estimator__gamma=auto, base_estimator__kernel=rbf;, score=0.903 total time=   1.9s
+[CV 3/5] END base_estimator__gamma=auto, base_estimator__kernel=rbf;, score=0.903 total time=   1.9s
+[CV 4/5] END base_estimator__gamma=auto, base_estimator__kernel=rbf;, score=0.903 total time=   2.0s
+[CV 5/5] END base_estimator__gamma=auto, base_estimator__kernel=rbf;, score=0.903 total time=   1.8s
+[CV 1/5] END base_estimator__gamma=auto, base_estimator__kernel=poly;, score=0.903 total time=39.7min
+[CV 2/5] END base_estimator__gamma=auto, base_estimator__kernel=poly;, score=0.903 total time=37.0min
+[CV 3/5] END base_estimator__gamma=auto, base_estimator__kernel=poly;, score=0.903 total time=27.1min
+[CV 4/5] END base_estimator__gamma=auto, base_estimator__kernel=poly;, score=0.903 total time=21.9min
+[CV 5/5] END base_estimator__gamma=auto, base_estimator__kernel=poly;, score=0.903 total time=19.7min
+[CV 1/5] END base_estimator__gamma=scale, base_estimator__kernel=linear;, score=0.897 total time=12.6min
+[CV 2/5] END base_estimator__gamma=scale, base_estimator__kernel=linear;, score=0.902 total time=11.7min
+[CV 3/5] END base_estimator__gamma=scale, base_estimator__kernel=linear;, score=0.887 total time=11.1min
+[CV 4/5] END base_estimator__gamma=scale, base_estimator__kernel=linear;, score=0.900 total time= 6.3min
+[CV 5/5] END base_estimator__gamma=scale, base_estimator__kernel=linear;, score=0.902 total time=25.5min
+[CV 1/5] END base_estimator__gamma=scale, base_estimator__kernel=rbf;, score=0.903 total time=   0.4s
+[CV 2/5] END base_estimator__gamma=scale, base_estimator__kernel=rbf;, score=0.903 total time=   0.5s
+[CV 3/5] END base_estimator__gamma=scale, base_estimator__kernel=rbf;, score=0.903 total time=   0.3s
+[CV 4/5] END base_estimator__gamma=scale, base_estimator__kernel=rbf;, score=0.903 total time=   0.4s
+[CV 5/5] END base_estimator__gamma=scale, base_estimator__kernel=rbf;, score=0.903 total time=   0.4s
+[CV 1/5] END base_estimator__gamma=scale, base_estimator__kernel=poly;, score=0.903 total time=   0.2s
+[CV 2/5] END base_estimator__gamma=scale, base_estimator__kernel=poly;, score=0.903 total time=   0.2s
+[CV 3/5] END base_estimator__gamma=scale, base_estimator__kernel=poly;, score=0.903 total time=   0.4s
+[CV 4/5] END base_estimator__gamma=scale, base_estimator__kernel=poly;, score=0.903 total time=   0.3s
+[CV 5/5] END base_estimator__gamma=scale, base_estimator__kernel=poly;, score=0.903 total time=   0.2s
+Best Accuracy: 0.9033 
+Best Parameter: {'base_estimator__gamma': 'auto', 'base_estimator__kernel': 'poly'}
